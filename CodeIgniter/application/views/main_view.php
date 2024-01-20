@@ -24,7 +24,7 @@
 <p>
     <?php
 
-    echo $main_data;
+    echo $model_data;
     ?>
 </p>
 </body>
