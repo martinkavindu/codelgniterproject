@@ -10,5 +10,11 @@ class Main_Model extends CI_Model{
     public function  insert_data($data){
         $this->db->insert('users',$data);
     }
+
+    public function fetch_data(){
+        $query = $this->db->get('users');
+
+        return $query;
+    }
 }
 ?>

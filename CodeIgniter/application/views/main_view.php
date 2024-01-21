@@ -40,6 +40,27 @@ if($this->uri->segment(2) == 'inserted'){
   </div>
   <button type="submit" name="insert" class="btn btn-default">Submit</button>
 </form>
+
+<div>
+    <h2> fetching data </h2>
+
+    <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>SN</th>
+        <th>email</th>
+        <th>password</th>
+        <th>name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        
+      </tr>
+
+    </tbody>
+  </table>
+</div>
 </div>
 
 </body>
