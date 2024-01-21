@@ -42,25 +42,49 @@ if($this->uri->segment(2) == 'inserted'){
 </form>
 
 <div>
-    <h2> fetching data </h2>
+    <h2>Fetching data</h2>
 
     <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>SN</th>
-        <th>email</th>
-        <th>password</th>
-        <th>name</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        
-      </tr>
+        <thead>
+            <tr>
+                <th>SN</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Name</th>
+                <th>delete</th>
+            </tr>
+        </thead>
+        <tbody>
 
-    </tbody>
-  </table>
+            <?php
+            if ($fetch_data->num_rows() > 0) {
+
+                foreach ($fetch_data->result() as $row) {
+            ?>
+                    <tr>
+                        <td> <?php echo $row->id; ?> </td>
+                        <td> <?php echo $row->email; ?> </td>
+                        <td> <?php echo $row->password; ?> </td>
+                        <td> <?php echo $row->name; ?> </td>
+                        <td><a href="#" class="btn btn-danger"> delete </a> </td>
+                    </tr>
+            <?php
+                }
+            } else {
+            ?>
+                <tr>
+                    <td colspan="4">
+                        No data found
+                    </td>
+                </tr>
+            <?php
+            }
+            ?>
+
+        </tbody>
+    </table>
 </div>
+
 </div>
 
 </body>

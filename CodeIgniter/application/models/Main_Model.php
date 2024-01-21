@@ -12,7 +12,12 @@ class Main_Model extends CI_Model{
     }
 
     public function fetch_data(){
-        $query = $this->db->get('users');
+
+        // //using model
+        // $query = $this->db->get('users');
+
+        //using sql query
+        $query = $this->db->query("SELECT * FROM users ORDER BY id DESC");
 
         return $query;
     }
