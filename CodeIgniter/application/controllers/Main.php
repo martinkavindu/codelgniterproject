@@ -24,30 +24,30 @@ public function index (){
 
 // form validation library
 
-public function form_validation(){
-$this->load->library('form_validation');
+public function form_validation() {
+    $this->load->library('form_validation');
 
-$this->form_validation->set_rules('email','email','required|alpha');
+    $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+    $this->form_validation->set_rules('name', 'Name', 'required');
+    $this->form_validation->set_rules('password', 'Password', 'required');
 
-if($this->form_validation->run()){
+    if ($this->form_validation->run()) {
+        $this->load->model('Main_Model');
 
-	$this->load->model('Main_Model');
+        $data = array(
+            'email' => $this->input->post('email'),
+            'name' => $this->input->post('name'),
+            'password' => $this->input->post('password')
+        );
 
-	$data = array(
-		'email' =>$this->input->post('email'),
-		'name' =>$this->input->post('name'),
-		'password' =>$this->input->post('password')
-	);
-	$this->main_model->insert_data($data);
+        $this->Main_Model->insert_data($data);
 
-	redirect(base_url(). 'main/inserted');
-}else{
-	$this->index();
+        redirect(base_url() . 'main/inserted');
+    } else {
+        $this->index();
+    }
 }
 
-
-
-}
 public function inserted(){
 	$this->index();
 }

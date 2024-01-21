@@ -12,7 +12,7 @@
 
 <div class="container">
   <h1 Class="text-danger">INSERTING DATA  INTO DB</h1>
-  <form action="<?php echo base_url()?>main/form_validation">
+  <form action="<?php echo base_url()?>main/form_validation" autocomplete="off" method ="post">
 <?php
 
 if($this->uri->segment(2) == 'inserted'){
@@ -24,16 +24,16 @@ if($this->uri->segment(2) == 'inserted'){
 
   <div class="form-group">
     <label for="name">Email address:</label>
-    <input type="email" name="email" class="form-control" id="email" REQUIRED >
+    <input type="email" name="email" class="form-control" id="email">
     <span class="text-danger"> <?php echo form_error('email');?></span> 
   </div>
   <div class="form-group">
     <label for="name">User name:</label>
-    <input type="text" name="name" class="form-control" id="email">
+    <input type="text" name="name" class="form-control" id="name"  autocomplete="username">
   </div>
   <div class="form-group">
     <label for="pwd">Password:</label>
-    <input type="password" name="password" class="form-control" id="pwd">
+    <input type="password" name="password" class="form-control" id="pwd" autocomplete="current-password">
   </div>
   <div class="checkbox">
     <label><input type="checkbox"> Remember me</label>
