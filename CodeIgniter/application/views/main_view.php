@@ -52,6 +52,7 @@ if($this->uri->segment(2) == 'inserted'){
                 <th>Password</th>
                 <th>Name</th>
                 <th>delete</th>
+                <th>update</th>
             </tr>
         </thead>
         <tbody>
@@ -66,7 +67,8 @@ if($this->uri->segment(2) == 'inserted'){
                         <td> <?php echo $row->email; ?> </td>
                         <td> <?php echo $row->password; ?> </td>
                         <td> <?php echo $row->name; ?> </td>
-                        <td><a href="#" class="btn btn-danger"> delete </a> </td>
+                        <td><a href="#" class="delete_data btn-danger btn" id ="<?php echo $row->id ?>"> delete </a> </td>
+                        <td><a href="<?php echo base_url();?>main/update_data/<?php echo $row->id ?>" class="update_data btn btn-primary" id ="">update</a> </td>
                     </tr>
             <?php
                 }
@@ -86,6 +88,24 @@ if($this->uri->segment(2) == 'inserted'){
 </div>
 
 </div>
+<script>
+$(document).ready(function(){
+  $(".delete_data").click(function(e){
+    e.preventDefault();
+    var id = $(this).attr("id"); // Use attr("data-id") instead of data("id")
+    console.log("Clicked ID:", id);
+    
+    if(confirm("Are you sure you want to delete this?")){
+      window.location = "<?php echo base_url(); ?>main/delete_data/"+id;
+    } else {
+      console.log("Deletion canceled");
+      return false;
+    }
+  });
+});
+
+
+ </script>
 
 </body>
 </html

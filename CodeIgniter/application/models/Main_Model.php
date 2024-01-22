@@ -21,5 +21,18 @@ class Main_Model extends CI_Model{
 
         return $query;
     }
+    //delete function
+
+    public function delete_data($id){
+        $this->db->where('id', $id);
+        $this->db->delete('users');
+    }
+
+    public function fetch_single_data($id){
+        $this->db->where('id',$id);
+        $query = $this->db->get('users');
+        return $query;
+    }
+ 
 }
 ?>

@@ -43,7 +43,26 @@ public function inserted(){
 	$this->index();
 }
 
+ public function delete_data(){
+    $id = $this->uri->segment(3);
+    var_dump($id); //  debugging
+    $this->load->model('Main_Model');
+    $this->Main_Model->delete_data($id);
+    redirect(base_url() ."main/deleted");
+}
 
+
+    public function deleted(){
+        $this->index();
+    }
+    
+    public function update_data(){
+        $user_id = $this->uri->segment(3);
+        $this->load->model('Main_Model');
+        $data['user_data'] = $this->Main_Model->fetch_single_data($user_id);    
+	    $data['fetch_data'] = $this->Main_Model->fetch_data();
+        $his->load->view('update',$data);
+    }
 
 }
 ?>
