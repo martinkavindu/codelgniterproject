@@ -41,7 +41,22 @@ class Main_Model extends CI_Model{
         $this->db->where("id",$id);
         $this->db->update("users",$data);
     }
-    //
+    
+
+    //login
+    public function can_login($email, $password)
+    {
+        $this->db->where('email', $email);
+        $this->db->where('password', $password);
+    
+        $query = $this->db->get('login');
+        if ($query->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
  
 }
 ?>

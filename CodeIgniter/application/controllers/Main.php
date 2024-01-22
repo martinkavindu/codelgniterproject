@@ -86,7 +86,56 @@ public function login (){
     $data['title'] = "sample of login session";
     $this->load->view('login',$data);
 }
+//form validation
+public function login_validation(){
 
+    $this->load->library('form_validation');
+    $this->form_validation->set_rules('email','email','required');
+    $this->form_validation->set_rules('password','password','required');
+
+    if($this->form_validation->run())
+    {
+$email = $this->input->post('email');
+$password = $this->input->post('password');
+
+$this->load->model('Main_Model');
+if($this->Main_Model->can_login($email,$password)){
+
+    $session_data = array(
+'email' => $email
+    );
+$this->session->set_userdata($session_data);
+
+redirect(base_url(). 'main/enter');
+}else
+{
+    $this->session->set_flashdata('error','incorrect email or password');
+    redirect(base_url(). 'main/login');
+}
+
+    }
+    
+    else{
+
+        $this->login();
+
+    }
+}
+
+public function enter(){
+    if($this->session->userdata('email')!=''){
+
+        $this->load->view('admindashboard');
+
+    }else{
+
+        redirect(base_url() . 'main/login');
+    }
+}
+public function logout(){
+    $this->session->unset_userdata('email');
+    redirect(base_url() . "main/login");
+}
 
 }
 ?>
