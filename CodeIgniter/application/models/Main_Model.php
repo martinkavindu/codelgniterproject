@@ -29,10 +29,19 @@ class Main_Model extends CI_Model{
     }
 
     public function fetch_single_data($id){
-        $this->db->where('id',$id);
+        $this->db->where('id', $id);
         $query = $this->db->get('users');
-        return $query;
+        
+        // Return the single row
+        return $query->row();
     }
+
+    public function update_data($data,$id){
+
+        $this->db->where("id",$id);
+        $this->db->update("users",$data);
+    }
+    //
  
 }
 ?>

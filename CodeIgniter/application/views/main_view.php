@@ -21,7 +21,6 @@ if($this->uri->segment(2) == 'inserted'){
     echo '<p class="text-success"> Data inserted successfully </p>';
 }
 ?>
-
   <div class="form-group">
     <label for="name">Email address:</label>
     <input type="email" name="email" class="form-control" id="email">
@@ -29,18 +28,17 @@ if($this->uri->segment(2) == 'inserted'){
   </div>
   <div class="form-group">
     <label for="name">User name:</label>
-    <input type="text" name="name" class="form-control" id="name"  autocomplete="username">
+    <input type="text" name="name" class="form-control" id="name" />
   </div>
   <div class="form-group">
     <label for="pwd">Password:</label>
-    <input type="password" name="password" class="form-control" id="pwd" autocomplete="current-password">
+    <input type="password" name="password" class="form-control" id="pwd"/>
   </div>
   <div class="checkbox">
     <label><input type="checkbox"> Remember me</label>
   </div>
   <button type="submit" name="insert" class="btn btn-default">Submit</button>
 </form>
-
 <div>
     <h2>Fetching data</h2>
 
@@ -68,7 +66,7 @@ if($this->uri->segment(2) == 'inserted'){
                         <td> <?php echo $row->password; ?> </td>
                         <td> <?php echo $row->name; ?> </td>
                         <td><a href="#" class="delete_data btn-danger btn" id ="<?php echo $row->id ?>"> delete </a> </td>
-                        <td><a href="<?php echo base_url();?>main/update_data/<?php echo $row->id ?>" class="update_data btn btn-primary" id ="">update</a> </td>
+                        <td><a href="<?php echo base_url();?>main/update_data/<?php echo $row->id ?>" class="btn btn-primary">Edit</a> </td>
                     </tr>
             <?php
                 }

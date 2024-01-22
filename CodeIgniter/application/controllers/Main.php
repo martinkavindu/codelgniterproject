@@ -31,9 +31,19 @@ public function form_validation() {
             'password' => $this->input->post('password')
         );
 
+        if($this->input->post("update")){
+
+            $this->Main_Model->update_data($data,$this->input->post("hidden_id"));
+            redirect(base_url()."main/updated");
+        }
+
+        if($this->input->post('insert')){
+ 
         $this->Main_Model->insert_data($data);
 
         redirect(base_url() . 'main/inserted');
+        }
+
     } else {
         $this->index();
     }
@@ -59,10 +69,24 @@ public function inserted(){
     public function update_data(){
         $user_id = $this->uri->segment(3);
         $this->load->model('Main_Model');
-        $data['user_data'] = $this->Main_Model->fetch_single_data($user_id);    
-	    $data['fetch_data'] = $this->Main_Model->fetch_data();
-        $his->load->view('update',$data);
+    
+        // Fetch data for the specified user
+        $data['user_data'] = $this->Main_Model->fetch_single_data($user_id);
+    
+        // Load the view with the user data
+        $this->load->view('update', $data);
     }
+    public function updated(){
+        $this->index();
+    }
+
+//user login
+
+public function login (){
+    $data['title'] = "sample of login session";
+    $this->load->view('login',$data);
+}
+
 
 }
 ?>
