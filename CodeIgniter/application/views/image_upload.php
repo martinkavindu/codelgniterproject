@@ -20,7 +20,11 @@
         <input type="submit" value="Upload" id="upload" name="upload" class="btn btn-primary" />
     </form>
 
-    <div id="uploaded_image"></div>
+    <div id="uploaded_image">
+        <?php 
+        echo $image_data;
+        ?>
+    </div>
 </div>
 
 <script>

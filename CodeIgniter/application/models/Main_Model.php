@@ -57,6 +57,33 @@ class Main_Model extends CI_Model{
         }
     }
     
+    //inserting images on db
+
+    public function insert_image($data){
+
+        $this->db->insert('tb_images',$data);
+    }
+//fetching images from db
+
+public function fetch_image(){
+    $output = '';
+    $this->db->select('image');
+    $this->db->from('tb_images');
+    $this->db->order_by('id',"DESC");
+    $query = $this->db->get();
+
+
+    foreach ($query->result() as $row) {
+        $output .= '
+            <div class="col-md-3">
+                <img src="' . base_url() . 'upload/' . $row->image. '"
+                     class="img_responsive img-thumbnail"/>
+            </div>';
+    }
+    
+
+    return $output;
+}
  
 }
 ?>

@@ -140,7 +140,8 @@ public function logout(){
 public function image_upload(){
 
     $data['title'] = "How to upload image using ajax jquery";
-
+$this->load->model('Main_Model');
+$data['image_data'] = $this->Main_Model->fetch_image();
     $this->load->view('image_upload',$data);
 }
 
@@ -151,12 +152,36 @@ public function ajax_upload(){
         $config['allowed_types'] = 'jpg|jpeg|png|gif';
         $this->load->library('upload', $config);
 
+
+
         if(!$this->upload->do_upload('image_file')){
             echo $this->upload->display_errors();
         }
         else{
             $data = $this->upload->data();
-            echo '<img src="'.base_url().'upload/'.$data['file_name'].'" />';
+
+            $config['image-library'] = 'gd2';
+            $config['source_image'] = './upload/'.$data["file_name"];
+            $config['create_thumb'] = FALSE;
+            $config['maintain_radio'] = FALSE;
+            $config['quality'] ="60%";
+            $config['width'] = 200;
+            $config['height'] = 200;
+            $config['new_image'] = '.upload/'.$data['file_name'];
+            $this->load->library('image_lib',$config);
+            $this->image_lib->resize();
+            //imstert image
+
+            $this->load->model('Main_Model');
+            
+            $image_data = array(
+                'image' => $data['file_name']
+
+            );
+            $this->Main_Model->insert_image($image_data);
+  echo $this->Main_Model->fetch_image();
+
+            // echo '<img src="'.base_url().'upload/'.$data['file_name'].'" />';
         }
     }
 }
