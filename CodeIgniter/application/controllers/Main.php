@@ -186,5 +186,28 @@ public function ajax_upload(){
     }
 }
 
+//check if email exists 
+
+public function email_availability(){
+    $data['title'] = "check if email exists";
+    $this->load->view('email_availability',$data);
+}
+
+public function check_email_availabilty(){
+    if(!filter_val($_POST['email'],FILTER_VALIDATE_EMAIL)){
+
+        echo '<lable class ="text-danger"> <span class = "glyphicon glyphicon-remove"> Email already exist </span>  </lable>';
+    }else{
+        $this->load->model('Main_Model');
+
+    if($this->Main_Model->is_email_available($_POST['email'])){
+        echo '<lable class ="text-danger"> <span class = "glyphicon glyphicon-remove"> Email already exist </span>  </lable>';
+
+    }else{
+        echo '<lable class ="text-danger"> <span class = "glyphicon glyphicon-remove"> Email available </span>  </lable>';
+    }
+    }
+}
+
 }
 ?>

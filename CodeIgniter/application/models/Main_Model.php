@@ -84,6 +84,23 @@ public function fetch_image(){
 
     return $output;
 }
- 
+ //check if email exists
+
+ public function is_email_available($email){
+
+    $this->db->where('email',$email);
+    $query->$this->db->get('login');
+
+    //SELECT * FROM login WHERE email ='$email'
+
+    if(query->num_rows()>0){
+        return true;
+    }else{
+        return false;
+    }
+ }
+
+
+
 }
 ?>
