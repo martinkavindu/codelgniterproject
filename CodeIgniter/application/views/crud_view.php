@@ -43,7 +43,7 @@
           <h4 class="modal-title">add user</h4>
         </div>
         <div class="modal-body">   
-        <form id="user_form">
+        <form id="user_form" method ="POST">
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
     <input type="email" class="form-control" name="email" id="email" placeholder="Enter email">
@@ -58,7 +58,7 @@
     <input type="password" name="password" class="form-control" id="password" placeholder="Password">
   </div>
  
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" name="action" value="Add" class="btn btn-primary">Submit</button>
 </form>
 
 
@@ -94,42 +94,41 @@ $(document).ready(function(){
     });
 
 
-    $(document).on('submit','#user_form',function(event){
-
-event.preventDefault();
-var email = $('#email').val();
-var name  =$('#name').val();
-var password =$('#password').val();
-
-
-if(email !='' && name !='' && password !='' ){
-
-$.ajax({
-    url:"<?php echo base_url() .'crudcontroller/user_action' ?>",
-    method:'POST',
-    data:new FormData(this),
-    contentType:false,
-    processData:false;
-    
-    success:function(data)
-    {
-        alert(data);
-        $('#user_form')[0].reset();
-        $('#userModal').modal('hide');
-        dataTable.ajax.reload()
-    }
-})
-
-
-}else{
-    alert('All fields are requuired');
-}
-    });
-
+ 
 });
+
+
+
 
 </script>
 
 </body>
 </html>
+<script>
+$(document).on('submit', '#user_form', function(event) {
+    event.preventDefault();
+    var email = $('#email').val();
+    var name = $('#name').val();
+    var password = $('#password').val();
 
+    if (email != '' && name != '' && password != '') {
+        $.ajax({
+            url: "<?php echo base_url() . 'crudcontroller/user_action' ?>",
+            method: 'POST',
+            data: new FormData(this),
+            contentType: false,
+            processData: false,  // Corrected this line
+            success: function(data) {
+                alert(data);
+                $('#user_form')[0].reset();
+                $('#myModal').modal('hide');  // Corrected this line
+                // dataTable.ajax.reload();
+            }
+        });
+    } else {
+        alert('All fields are required');
+    }
+});
+
+
+    </script>
