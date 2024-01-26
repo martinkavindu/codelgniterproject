@@ -41,6 +41,22 @@ class CrudController extends CI_Controller{
        echo json_encode($output);
 
     }
+
+    public function user_action(){
+        if($_POST['action'] == 'Add'){
+
+        $insert_data = array(
+            'email'  => $this->input->post("email"),
+            'name'   => $this->input->post('name'),
+            'password' =>$this->input->post('password') 
+        );
+
+        $this->load->model('CrudModel');
+        $this->CrudModel->insert_crud($insert_data);
+
+        echo 'data inserted successfully';
+        }
+    }
 }
 
 

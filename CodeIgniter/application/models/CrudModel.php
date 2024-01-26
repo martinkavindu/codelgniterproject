@@ -46,7 +46,9 @@ $this->db->order_by("id","DESC");
             $this->db->from($this->table);
             return $this->db->count_all_results();
         }
-    
+    public function insert_crud(){
+        $this->db->insert('users',$data);
+    }
 }
 
 

@@ -31,41 +31,9 @@
  
 </table>
 </div>
-   
     </div>
 
-
-
-    <script>
-
-        $(document).ready(function(){
-
-            var dataTable = $('#user_data').DataTable({
-                'processing':true,
-                'serverSide':true,
-                'order':[],
-                'ajax':{
-                    url:"<?php echo base_url().'crudcontroller/fetch_user';?>",
-                    type:'POST'
-                },
-
-                "columnDefs":[
-                    {
-                        "targets":[0,3,4],
-                        "orderable":false,
-                    }
-                ]
-
-            })
-
-
-
-        })
-
-        </script>
-</body>
-</html>
-<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -75,19 +43,19 @@
           <h4 class="modal-title">add user</h4>
         </div>
         <div class="modal-body">   
-        <form>
+        <form id="user_form">
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+    <input type="email" class="form-control" name="email" id="email" placeholder="Enter email">
  
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">User name</label>
-    <input type="text" class="form-control" name = "name" id="exampleInputPassword1" placeholder="name">
+    <input type="text" class="form-control" name = "name" id="name" placeholder="name">
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <input type="password" name="password" class="form-control" id="password" placeholder="Password">
   </div>
  
   <button type="submit" class="btn btn-primary">Submit</button>
@@ -103,3 +71,65 @@
     </div>
   </div>
   
+  <script>
+
+$(document).ready(function(){
+
+    var dataTable = $('#user_data').DataTable({
+        'processing':true,
+        'serverSide':true,
+        'order':[],
+        'ajax':{
+            url:"<?php echo base_url().'crudcontroller/fetch_user';?>",
+            type:'POST'
+        },
+
+        "columnDefs":[
+            {
+                "targets":[0,3,4],
+                "orderable":false,
+            }
+        ]
+
+    });
+
+
+    $(document).on('submit','#user_form',function(event){
+
+event.preventDefault();
+var email = $('#email').val();
+var name  =$('#name').val();
+var password =$('#password').val();
+
+
+if(email !='' && name !='' && password !='' ){
+
+$.ajax({
+    url:"<?php echo base_url() .'crudcontroller/user_action' ?>",
+    method:'POST',
+    data:new FormData(this),
+    contentType:false,
+    processData:false;
+    
+    success:function(data)
+    {
+        alert(data);
+        $('#user_form')[0].reset();
+        $('#userModal').modal('hide');
+        dataTable.ajax.reload()
+    }
+})
+
+
+}else{
+    alert('All fields are requuired');
+}
+    });
+
+});
+
+</script>
+
+</body>
+</html>
+
