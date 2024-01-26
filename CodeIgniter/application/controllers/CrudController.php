@@ -18,9 +18,10 @@ class CrudController extends CI_Controller{
        foreach($fetch_data as $row){
 
         $sub_array = array();
-
+        $sub_array[] = $row->id;
         $sub_array[] = $row->email;
         $sub_array[] = $row->name;
+        $sub_array[] = $row->password;
         $sub_array[] = '<button type="button" name="update" id="'.$row->id.'" 
         class="btn btn-warning btn-xs">update</button>';
         $sub_array[] = '<button type="button" name="delete" id="'.$row->id.'" 

@@ -8,7 +8,7 @@ public function index (){
   $this->load->model("Main_Model");
 
 	$data['fetch_data'] = $this->Main_Model->fetch_data();
-	$this->load->view('main_view',$data);
+	$this->load->view('crud_view',$data);
 
 
 }
