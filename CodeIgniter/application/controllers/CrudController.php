@@ -23,9 +23,9 @@ class CrudController extends CI_Controller{
         $sub_array[] = $row->name;
         $sub_array[] = $row->password;
         $sub_array[] = '<button type="button" name="update" id="'.$row->id.'" 
-        class="btn btn-warning btn-xs">update</button>';
+        class="btn btn-warning btn-xs update">update</button>';
         $sub_array[] = '<button type="button" name="delete" id="'.$row->id.'" 
-        class="btn btn-danger btn-xs">delete</button>';
+        class="btn btn-danger btn-xs delete">delete</button>';
 
         $data[]= $sub_array;
        }
@@ -55,6 +55,23 @@ class CrudController extends CI_Controller{
         $this->CrudModel->insert_crud($insert_data);
 
         echo 'data inserted successfully';
+        }
+    }
+
+    //update
+
+    public function fetch_single_user(){
+
+        $output = array();
+        $this->load->model('CrudModel');
+        $data = $this->CrudModel->fetch_single_user($_POST["user_id"]);
+
+        foreach($data as  $row){
+            $output['email'] = $row->email;
+            $output['name']   =$row->name;
+            $output['password'] =$row->password;
+
+            echo json_encode($output);
         }
     }
 }

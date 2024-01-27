@@ -64,7 +64,8 @@
   </div>
   </div>
 <div class="modal_footer">
-  <input type= "submit" name="action" value ="Add" />
+  <input type = "hidden" name ="user_id" id="user_id"/>
+  <input type= "submit" id="action" name="action" value ="Add" class="btn btn-success" />
   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
 
@@ -125,6 +126,27 @@ $(document).ready(function(){
     } else {
         alert('Email and password fields are required');
     }
+});
+
+
+$(document).on('click', '.update', function(){
+    var user_id = $(this).attr("id");
+
+    $.ajax({
+        url: "<?php echo base_url(); ?>crudcontroller/fetch_single_user",
+        method: "POST",
+        data: {user_id: user_id},
+        dataType: "json",
+        success: function(data) {
+            $('#userModal').modal('show');
+            $("#email").val(data.email);
+            $('#name').val(data.name);
+            $('#password').val(data.password);
+            $('.modal_title').text("Edit user");
+            $('#user_id').val(user_id);
+            $('#action').val("Edit");
+        }
+    });
 });
 
 
