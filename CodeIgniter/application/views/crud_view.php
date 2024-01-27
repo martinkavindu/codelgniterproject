@@ -14,7 +14,7 @@
 <body>
     <div class="container">
         <h1>CRUD APPLICATION USING AJAX IN CODEIGNITER</h1>
-        <button type="button" class="btn btn-info mb-2" data-toggle="modal" data-target="#myModal"> + ADD</button>
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#userModal">Add</button>
 <div class="table-responsive">
         <table class="table table-bordered table-striped" id="user_data">
 
@@ -33,17 +33,22 @@
 </div>
     </div>
 
-    <div class="modal fade" id="myModal" role="dialog">
+</body>
+</html>
+
+
+<div class="modal fade" id="userModal">
     <div class="modal-dialog">
     
       <!-- Modal content-->
+      <form id="user_form" method ="post">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">add user</h4>
+          <h4 class="modal-title">Add user</h4>
         </div>
-        <div class="modal-body">   
-        <form id="user_form" method ="POST">
+       <div class="modal-body">   
+  
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
     <input type="email" class="form-control" name="email" id="email" placeholder="Enter email">
@@ -51,26 +56,27 @@
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">User name</label>
-    <input type="text" class="form-control" name = "name" id="name" placeholder="name">
+    <input type="text" class="form-control" name = "name" id="name" placeholder="Enter name">
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+    <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password">
   </div>
- 
-  <button type="submit" name="action" value="Add" class="btn btn-primary">Submit</button>
+  </div>
+<div class="modal_footer">
+  <input type= "submit" name="action" value ="Add" />
+  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+
+  
+  </div>
 </form>
 
-
-        </div>
-        <div class="modal-footer">
-      
-        </div>
-      </div>
       
     </div>
   </div>
   
+
   <script>
 
 $(document).ready(function(){
@@ -93,6 +99,34 @@ $(document).ready(function(){
 
     });
 
+    $(document).on('submit', '#user_form', function(event) {
+    event.preventDefault();
+    var email = $('#email').val();
+    var name = $('#name').val();
+    var password = $('#password').val();
+
+    if (email != '' && password != '') {
+        var formData = new FormData(this);
+        formData.append('action', 'Add'); 
+
+        $.ajax({
+            url: "<?php echo base_url() . 'crudcontroller/user_action' ?>",
+            method: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,  
+            success: function(data) {
+                alert(data);
+                $('#user_form')[0].reset();
+                $('#userModal').modal('hide');  
+                dataTable.ajax.reload();
+            }
+        });
+    } else {
+        alert('Email and password fields are required');
+    }
+});
+
 
  
 });
@@ -101,34 +135,3 @@ $(document).ready(function(){
 
 
 </script>
-
-</body>
-</html>
-<script>
-$(document).on('submit', '#user_form', function(event) {
-    event.preventDefault();
-    var email = $('#email').val();
-    var name = $('#name').val();
-    var password = $('#password').val();
-
-    if (email != '' && name != '' && password != '') {
-        $.ajax({
-            url: "<?php echo base_url() . 'crudcontroller/user_action' ?>",
-            method: 'POST',
-            data: new FormData(this),
-            contentType: false,
-            processData: false,  // Corrected this line
-            success: function(data) {
-                alert(data);
-                $('#user_form')[0].reset();
-                $('#myModal').modal('hide');  // Corrected this line
-                // dataTable.ajax.reload();
-            }
-        });
-    } else {
-        alert('All fields are required');
-    }
-});
-
-
-    </script>
