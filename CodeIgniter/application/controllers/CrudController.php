@@ -88,7 +88,14 @@ class CrudController extends CI_Controller{
             echo json_encode($output);
         }
     }
+#delete
 
+public function delete_single_user(){
+
+    $this->load->model('CrudModel');
+    $this->CrudModel->delete_single_user($_POST['user_id']);
+    echo "data deleted successfully";
+}
    
 }
 

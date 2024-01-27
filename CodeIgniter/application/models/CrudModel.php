@@ -64,6 +64,14 @@ $this->db->order_by("id","DESC");
         $this->db->where('id',$user_id);
         $this->db->update('users',$data);
     }
+
+    //delete
+    public function delete_single_user($user_id){
+        $this->db->where("id",$user_id);
+        $this->db->delete("users");
+
+        //DELETE FROM users WHERE id = '$user_id'
+    }
 }
 
 

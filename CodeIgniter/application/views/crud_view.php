@@ -143,12 +143,29 @@ $(document).on('click', '.update', function(){
             $('#password').val(data.password);
             $('.modal_title').text("Edit user");
             $('#user_id').val(user_id);
-            $('#action').val("Edit"); // Ensure 'Edit' is set for update
+            $('#action').val("Edit"); 
         }
     });
 });
+//delete class
 
- 
+$(document).on('click', '.delete', function(){
+    var user_id = $(this).attr('id');
+    if(confirm("Are you sure you want to delete this?")) {
+        $.ajax({
+            url: "<?php echo base_url() ;?>crudcontroller/delete_single_user",
+            method: "POST",
+            data: {user_id: user_id},  
+            success: function(data) {
+                alert(data);
+                dataTables.ajax.reload();
+            }
+        });
+    } else {
+        return false;
+    }
+});
+
 });
 
 
