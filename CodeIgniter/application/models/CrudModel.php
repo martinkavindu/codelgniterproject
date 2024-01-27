@@ -59,6 +59,11 @@ $this->db->order_by("id","DESC");
         return $query->result();
 
     }
+
+    public function update_crud($user_id,$data){
+        $this->db->where('id',$user_id);
+        $this->db->update('users',$data);
+    }
 }
 
 

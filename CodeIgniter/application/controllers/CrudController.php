@@ -56,6 +56,20 @@ class CrudController extends CI_Controller{
 
         echo 'data inserted successfully';
         }
+
+        if($_POST["action"] == "Edit"){
+            $updated_data = array(
+
+                'email' => $this->input->post('email'),
+                'name'  =>$this->input->post('name'),
+                'password' =>$this->input->post('password')
+
+            );
+             $this->load->model('CrudModel');
+             $this->CrudModel->update_crud($this->input->post('user_id'),$updated_data,);
+             echo "Data updated";
+        
+        }
     }
 
     //update
@@ -74,6 +88,8 @@ class CrudController extends CI_Controller{
             echo json_encode($output);
         }
     }
+
+   
 }
 
 

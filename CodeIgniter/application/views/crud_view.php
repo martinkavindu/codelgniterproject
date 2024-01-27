@@ -128,7 +128,6 @@ $(document).ready(function(){
     }
 });
 
-
 $(document).on('click', '.update', function(){
     var user_id = $(this).attr("id");
 
@@ -144,11 +143,10 @@ $(document).on('click', '.update', function(){
             $('#password').val(data.password);
             $('.modal_title').text("Edit user");
             $('#user_id').val(user_id);
-            $('#action').val("Edit");
+            $('#action').val("Edit"); // Ensure 'Edit' is set for update
         }
     });
 });
-
 
  
 });
