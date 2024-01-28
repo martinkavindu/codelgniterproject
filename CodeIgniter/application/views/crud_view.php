@@ -13,6 +13,10 @@
 </head>
 <body>
     <div class="container">
+<h3> <?php echo anchor('upload_images/upload_multiple', 'upload images'); ?>
+</h3>
+<h3> <?php echo anchor('main/login_validation', 'login'); ?>
+</h3>
         <h1>CRUD APPLICATION USING AJAX IN CODEIGNITER</h1>
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#userModal">Add</button>
 <div class="table-responsive">
