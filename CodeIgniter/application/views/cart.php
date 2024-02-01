@@ -22,94 +22,107 @@
     
 
 <div class="container">
-	<div class="row">
-		<div class="col-xs-8">
-			<div class="panel panel-info">
-				<div class="panel-heading">
-					<div class="panel-title">
-						<div class="row">
-							<div class="col-xs-6">
-								<h5><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h5>
-							</div>
-							<div class="col-xs-6">
-								<button type="button" class="btn btn-primary btn-sm btn-block">
-									<span class="glyphicon glyphicon-share-alt"></span> Continue shopping
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/100x70">
-						</div>
-						<div class="col-xs-4">
-							<h4 class="product-name"><strong>Product name</strong></h4><h4><small>Product description</small></h4>
-						</div>
-						<div class="col-xs-6">
-							<div class="col-xs-6 text-right">
-								<h6><strong>25.00 <span class="text-muted">x</span></strong></h6>
-							</div>
-							<div class="col-xs-4">
-								<input type="text" class="form-control input-sm" value="1">
-							</div>
-							<div class="col-xs-2">
-								<button type="button" class="btn btn-link btn-xs">
-									<span class="glyphicon glyphicon-trash"> </span>
-								</button>
-							</div>
-						</div>
-					</div>
-					<hr>
-					<div class="row">
-						<div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/100x70">
-						</div>
-						<div class="col-xs-4">
-							<h4 class="product-name"><strong>Product name</strong></h4><h4><small>Product description</small></h4>
-						</div>
-						<div class="col-xs-6">
-							<div class="col-xs-6 text-right">
-								<h6><strong>25.00 <span class="text-muted">x</span></strong></h6>
-							</div>
-							<div class="col-xs-4">
-								<input type="text" class="form-control input-sm" value="1">
-							</div>
-							<div class="col-xs-2">
-								<button type="button" class="btn btn-link btn-xs">
-									<span class="glyphicon glyphicon-trash"> </span>
-								</button>
-							</div>
-						</div>
-					</div>
-					<hr>
-					<div class="row">
-						<div class="text-center">
-							<div class="col-xs-9">
-								<h6 class="text-right">Added items?</h6>
-							</div>
-							<div class="col-xs-3">
-								<button type="button" class="btn btn-default btn-sm btn-block">
-									Update cart
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="panel-footer">
-					<div class="row text-center">
-						<div class="col-xs-9">
-							<h4 class="text-right">Total <strong>$50.00</strong></h4>
-						</div>
-						<div class="col-xs-3">
-							<button type="button" class="btn btn-success btn-block">
-								Checkout
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
+
+
+<br/> <br/>
+
+<div class = "col-lg-6 col-md-6">
+	<div class="table-responsive">
+
+	<h2 class="text-center"> shopping cart </h2>
+	<br/>
+
+	<?php
+	foreach ($product as $row)
+	{
+
+		echo '
+
+		<div class="col-md-4" style="padding:16px";background-color:#f1f1f1; border:1px solid #ccc;
+		margin-bottom:16px; height:"400px" align="center">
+		<img src = " '.base_url().'upload/'.$row->product_image.'"
+		class="img-thumbnail" /> <br/>
+
+
+		<h4>'.$row->product_name.' </h4>
+
+		<h3 class="text-danger">'.$row->product_price.'</h3>
+
+	<input type = "text" name = "quantity" class= "quantity" id="'.$row->product_id.'"/>
+
+
+	<button type ="button" name="add_cart" class="btn btn-success add_cart" data-productname = "'.$row->product_name.'"
+	data-price = "'.$row->product_price.'" data-productid = "'.$row->product_id.'"> Add to cart
+	
+	</button>
 		</div>
-	</div>
+		';
+
+	}
+
+
+?>
+</div>
+</div>
+<div class = "col-lg-6 col-md-6">
+
+<div id="cart_details">
+	<h3 class ="text-centre"> cart is empty </h3>
+
+</div>
+</div>
+
 </div>
 </body>
 </html>
+
+<script>
+$(document).ready(function() {
+
+	$('.add_cart').click(function() {
+
+
+		var product_id = $(this).data('productid');
+		var product_name = $(this).data('productname');
+		var product_price = $(this).data('price');
+		var quantity = $('#' + product_id).val();
+		  if(quantity != '' &&  quantity >0){
+$.ajax({
+	url:"<?php echo base_url(); ?>shoppingcontroller/add",
+	method:"POST",
+	data:{product_id:product_id,product_name:product_name,
+	product_price:product_price,quantity:quantity},
+
+	success:function(data){
+		alert("product added to cart");
+		$('#cart_details').html(data);
+		$('#' + product_id).val('');
+
+	}
+});
+
+
+		  }else{
+
+			alert('Enter quantity')
+		  }
+		
+	});
+
+	$('#cart_details').load("<?php echo base_url(); ?>shoppingcontroller/load");
+
+	$(document).on('click','.remove_inventory',function(){
+		var row_id = $(this).attr("id");
+		if(confirm('Are you sure you want to remove this item')){
+
+
+		}else
+		{
+			return false;
+		}
+	})
+
+	
+});
+
+</script>
