@@ -115,12 +115,39 @@ $.ajax({
 		var row_id = $(this).attr("id");
 		if(confirm('Are you sure you want to remove this item')){
 
+			$.ajax({
+				url:"<?php echo base_url();?>shoppingcontroller/remove",
+				method:"POST",
+				data:{row_id:row_id},
+				success:function(data){
+					alert('Product removed from cart');
+					$('#cart_details').html(data);
+				}
+			})
+
 
 		}else
 		{
 			return false;
 		}
-	})
+	});
+
+	$(document).on('click','#clear_cart',function(){
+
+if(confirm("Are you sure you want to clear cart")){
+ $.ajax({
+	url: "<?php echo base_url(); ?>shoppingcontroller/clear",
+	method:"POST",
+	success:function(data){
+		alert('You have cleared your cart success');
+		$("#cart_details").html(data);
+	}
+ })
+
+}else{
+	return false;
+}
+	});
 
 	
 });

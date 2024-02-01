@@ -27,21 +27,37 @@ class ShoppingController extends CI_Controller {
         echo $this->view();
     }
 
-
     public  function load(){
 
         echo $this->view();
     }
+    public function remove(){
 
+        $this->load->library("cart");
+        $row_id = $_POST['row_id'];
+
+        $data = array(
+            'rowid' => $row_id,
+            'qty ' => 0
+        );
+
+       $this->cart->update($data); 
+    echo $this->view();
+    }
     
+
+    public function clear(){
+        $this->load->library('cart');
+        $this->cart-destroy();
+        echo $this-view();
+    }
     public function view(){
         $output = '';
         $output .='
 <h3> shopping cart </h3> <br/>
 <div class= "table-responsive">
 <div align="right">
-
-<button type = "button" id="clear_clear" class="btn btn-warning">
+<button type = "button" id="clear_cart" class="btn btn-warning">
 Clear cart
  </button>
 </div>
