@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="container">
-<h3> <?php echo anchor('upload_images/upload_multiple', 'upload images'); ?>
+<h3> <?php echo anchor('excel_export/exportusers', 'excel export example'); ?>
 </h3>
 <h3> <?php echo anchor('shoppingcontroller/shoppingcart', 'shopping cart'); ?>
 </h3>
