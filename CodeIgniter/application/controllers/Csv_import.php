@@ -6,7 +6,7 @@ class Csv_import extends CI_Controller {
  {
   parent::__construct();
   $this->load->model('CSVmodel');
-  $this->load->library('csvimport');
+//   $this->load->library('csvimport');
 
  }
 
@@ -24,10 +24,9 @@ class Csv_import extends CI_Controller {
          <table class="table table-bordered table-striped">
           <tr>
            <th>Sr. No</th>
-           <th>First Name</th>
-           <th>Last Name</th>
-           <th>Phone</th>
-           <th>Email Address</th>
+           <th>email</th>
+           <th>name</th>
+           <th>password</th>
           </tr>
   ';
   $count = 0;
@@ -39,10 +38,9 @@ class Csv_import extends CI_Controller {
     $output .= '
     <tr>
      <td>'.$count.'</td>
-     <td>'.$row->first_name.'</td>
-     <td>'.$row->last_name.'</td>
-     <td>'.$row->phone.'</td>
      <td>'.$row->email.'</td>
+     <td>'.$row->name.'</td>
+     <td>'.$row->password.'</td>
     </tr>
     ';
    }
@@ -65,10 +63,10 @@ public function import()
   foreach($file_data as $row)
   {
    $data[] = array(
-    'first_name' => $row["First Name"],
-          'last_name'  => $row["Last Name"],
-          'phone'   => $row["Phone"],
-          'email'   => $row["Email"]
+    'email' => $row["email"],
+          'name'  => $row["name"],
+          'password'   => $row["password"],
+        
    );
   }
   $this->CSVmodel->insert($data);
