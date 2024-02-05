@@ -87,7 +87,7 @@ class Sendemail extends CI_Controller {
      else
      {
       $this->session->set_flashdata('message', 'There is an error in attach file');
-         redirect('sendemail');
+         redirect('sendemail/emailapplication');
      }
  }
 

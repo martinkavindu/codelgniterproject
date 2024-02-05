@@ -11,7 +11,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8" style="margin:0 auto; float:none;">
-          <h3 align="center"></h3>
+          <h3 class = "text-center"></h3>
           <br />
           <?php
 
