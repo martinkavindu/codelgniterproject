@@ -108,8 +108,10 @@ class Members extends CI_Controller {
                 $this->session->set_userdata('error_msg', 'Invalid file, please select only CSV file.');
             }
         }
-        redirect('http://localhost/introduction_codelgniter/codelgniterproject/CodeIgniter/members/csvimport
-        ');
+        // redirect('http://localhost/introduction_codelgniter/codelgniterproject/CodeIgniter/members/csvimport
+        // ');
+        redirect(site_url('members/csvimport'));
+
     }
     
     /*
