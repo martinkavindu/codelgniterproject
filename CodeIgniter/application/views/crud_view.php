@@ -15,8 +15,7 @@
     <div class="container">
 <!-- <h3> <?php echo anchor('members/csvimport', 'excel import example'); ?>
 </h3> -->
-<!-- <h3> <?php echo anchor('sendemail/emailapplication', 'apply now'); ?>
-</h3>  -->
+<h3><?php echo anchor('searchajax/search', 'search data'); ?></h3>
 <h3> <?php echo anchor('shoppingcontroller/shoppingcart', 'shopping cart'); ?>
 </h3>
         <h1>CRUD APPLICATION USING AJAX IN CODEIGNITER</h1>
