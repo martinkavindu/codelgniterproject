@@ -16,7 +16,7 @@
 <!-- <h3> <?php echo anchor('members/csvimport', 'excel import example'); ?>
 </h3> -->
 <h3><?php echo anchor('searchajax/search', 'search data'); ?></h3>
-<h3> <?php echo anchor('shoppingcontroller/shoppingcart', 'shopping cart'); ?>
+<h3> <?php echo anchor('htmltopdf/pdfviewer', 'view pdf'); ?>
 </h3>
         <h1>CRUD APPLICATION USING AJAX IN CODEIGNITER</h1>
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#userModal">Add</button>
