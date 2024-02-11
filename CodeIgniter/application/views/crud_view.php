@@ -18,6 +18,8 @@
 <h3><?php echo anchor('searchajax/search', 'search data'); ?></h3>
 <h3> <?php echo anchor('htmltopdf/pdfviewer', 'view pdf'); ?>
 </h3>
+
+<h3> <?php echo anchor('dynamic_dependent/dynamic','dynamic dropdown');?></h3>
         <h1>CRUD APPLICATION USING AJAX IN CODEIGNITER</h1>
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#userModal">Add</button>
 <div class="table-responsive">
