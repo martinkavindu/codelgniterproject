@@ -76,16 +76,16 @@
 
         });
 
-        $('#name').change(function(){
+        $('#email').change(function(){
 
-var name = $('#name').val();
+var email = $('#email').val();
 
-if(name != ''){
+if(email != ''){
 
     $.ajax({
         url:"<?php echo base_url();?>dynamic_dependent/fetchname",
         method:"POST",
-        data:{name:name},
+        data:{email:email},
 
         success:function(data){
 
