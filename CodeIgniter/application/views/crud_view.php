@@ -15,6 +15,8 @@
     <div class="container">
 <!-- <h3> <?php echo anchor('members/csvimport', 'excel import example'); ?>
 </h3> -->
+
+<h3> <?php echo anchor('register/registeruser','user registration') ?> </h3>
 <h3><?php echo anchor('searchajax/search', 'search data'); ?></h3>
 <h3> <?php echo anchor('htmltopdf/pdfviewer', 'view pdf'); ?>
 </h3>
