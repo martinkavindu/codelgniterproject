@@ -11,6 +11,18 @@
   <div class="panel panel-default">
    <div class="panel-heading">Register</div>
    <div class="panel-body">
+
+   <?php
+   if ($this->session->flashdata('message'))
+   {
+    echo '
+
+<div class = "alert alert-sucess">
+'.$this->session->flashdata("message").'
+    ';
+   }
+
+   ?>
     <form method="post" action="<?php echo base_url(); ?>register/validation">
      <div class="form-group">
       <label>Enter Your Name</label>
