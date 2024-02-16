@@ -12,7 +12,7 @@ class Register extends CI_Controller {
    redirect('private_area');
   }
   $this->load->library('form_validation');
-  $this->load->library('encrypt');
+//   $this->load->library('encrypt');
   $this->load->model('register_model');
  }
 
@@ -29,11 +29,12 @@ class Register extends CI_Controller {
   if($this->form_validation->run())
   {
    $verification_key = md5(rand());
-   $encrypted_password = $this->encrypt->encode($this->input->post('user_password'));
+//    $encrypted_password = $this->encrypt->encode($this->input->post('user_password'));
    $data = array(
     'name'  => $this->input->post('user_name'),
     'email'  => $this->input->post('user_email'),
-    'password' => $encrypted_password,
+    'password' =>$this->input->post('user_password'),
+    // 'password' => $encrypted_password,
     'verification_key' => $verification_key
    );
    $id = $this->register_model->insert($data);
@@ -48,17 +49,17 @@ class Register extends CI_Controller {
     ";
     $config = array(
      'protocol'  => 'smtp',
-     'smtp_host' => 'smtpout.secureserver.net',
-     'smtp_port' => 80,
-     'smtp_user'  => 'xxxxxxx', 
-                  'smtp_pass'  => 'xxxxxxx', 
+     'smtp_host' => 'smtp.gmail.com',
+     'smtp_port' => 587,
+     'smtp_user'  => 'martinmutuku1998@gmail.com', 
+     'smtp_pass'  => 'kavindu-36018604', 
      'mailtype'  => 'html',
      'charset'    => 'iso-8859-1',
                    'wordwrap'   => TRUE
     );
     $this->load->library('email', $config);
     $this->email->set_newline("\r\n");
-    $this->email->from('info@webslesson.info');
+    $this->email->from('martinmutuku1998@gmail.com');
     $this->email->to($this->input->post('user_email'));
     $this->email->subject($subject);
     $this->email->message($message);
