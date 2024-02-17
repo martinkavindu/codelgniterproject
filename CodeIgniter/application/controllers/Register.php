@@ -51,15 +51,15 @@ class Register extends CI_Controller {
      'protocol'  => 'smtp',
      'smtp_host' => 'smtp.gmail.com',
      'smtp_port' => 587,
-     'smtp_user'  => 'martinmutuku1998@gmail.com', 
-     'smtp_pass'  => 'kavindu-36018604', 
+     'smtp_user'  => 'xxxx', 
+     'smtp_pass'  => 'xxxxx', 
      'mailtype'  => 'html',
      'charset'    => 'iso-8859-1',
                    'wordwrap'   => TRUE
     );
     $this->load->library('email', $config);
     $this->email->set_newline("\r\n");
-    $this->email->from('martinmutuku1998@gmail.com');
+    $this->email->from('@e');
     $this->email->to($this->input->post('user_email'));
     $this->email->subject($subject);
     $this->email->message($message);
