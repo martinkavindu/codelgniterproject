@@ -14,7 +14,7 @@ public function __construct(){
 public function index(){
     $data['brand_data']=$this->product_filter_model->fetch_filter_type('product_brand');
     $data['ram_data'] = $this->product_filter_model->fetch_filter_type('product_ram');
-    $data['product_storange'] = $this->product_filter_model->fetch_filter_type('product_storange');
+    $data['product_storage'] = $this->product_filter_model->fetch_filter_type('product_storage');
 
     $this->load->view('product_filter',$data);
 }
