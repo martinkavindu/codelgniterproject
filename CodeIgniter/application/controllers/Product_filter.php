@@ -19,6 +19,23 @@ public function index(){
     $this->load->view('product_filter',$data);
 }
 
+public function fetch_data(){
+
+    $minimum_price = $this->input->post('minimum_price');
+    $maximum_price = $this->input->post('maximum_price');
+    $brand = $this->input->post('brand');
+    $ram = $this->input->post('ram');
+    $storage = $this->input->post('storage');
+
+    $this->load->library('pagination');
+
+    $config = array();
+    $config['base_url'] = '#';
+    $config['total_rows'] = $this->product_filter_model->count_all($minimum_price,$maximum_price,$brand,$ram,$storage);
+
+
+}
+
 }
 
 

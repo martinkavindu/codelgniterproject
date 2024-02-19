@@ -95,13 +95,55 @@
         </div>
 
     </div>
-<!-- <style>
+<style>
 #loading
 {
  text-align:center; 
- background: url('<?php echo base_url(); ?>asset/loader.gif') no-repeat center; 
+ background: url('<?php echo base_url(); ?>assets/loader.gif') no-repeat center; 
  height: 150px;
 }
-</style> -->
+</style>
+
+<script>
+
+$(document).ready(function(){
+
+  function filter_data(page) {
+$('#filter_data').html("<div id='loading'></div>");
+var action = 'fetch_data'
+var minimum_price =$('#hidden_minimum_price').val();
+var maximum_price =$('#hidden_maximum_price').val();
+var brand = get_filter('brand');
+var ram = get_filter('ram');
+var storage = get_filter('storage');
+
+$.ajax({
+
+    url:"<?php echo base_url(); ?>product_filter/fetch_data"+page,
+    method:"POST",
+    dataType:"JSON",
+    data:{action:action,minimum_price:minimum_price,maximum_price:maximum_price,
+    brand:brand,ram:ram, storage:storage},
+
+    success:function(data){
+
+        $('.filter_data').html(data.product_list);
+        $('#pagination_link').html(data.pagination_link);
+    }
+
+})
+
+  } 
+  function get_filter(class_name)
+  {
+    var filter =[];
+    $('.'+class_name+ ':checked').each(function(){
+        filter.push($(this).val());
+    });
+    return filter;
+
+  }
+})
+    </script>
 </body>
 </html>
