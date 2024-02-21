@@ -49,6 +49,8 @@ $query .= "AND product_ram IN ('".$ram_filter."')";
 
     return $data->num_rows();
    }
+
+   
 }
 
 
