@@ -18,7 +18,7 @@ class Product_filter extends CI_Controller {
 
  function fetch_data()
  {
-  sleep(1);
+  sleep(2);
   $minimum_price = $this->input->post('minimum_price');
   $maximum_price = $this->input->post('maximum_price');
   $brand = $this->input->post('brand');
