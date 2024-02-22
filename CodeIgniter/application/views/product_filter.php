@@ -99,51 +99,76 @@
 #loading
 {
  text-align:center; 
- background: url('<?php echo base_url(); ?>assets/loader.gif') no-repeat center; 
+ background: url('<?php echo base_url(); ?>upload/loader.gif') no-repeat center; 
  height: 150px;
 }
 </style>
 
 <script>
-
 $(document).ready(function(){
 
-  function filter_data(page) {
-$('#filter_data').html("<div id='loading'></div>");
-var action = 'fetch_data'
-var minimum_price =$('#hidden_minimum_price').val();
-var maximum_price =$('#hidden_maximum_price').val();
-var brand = get_filter('brand');
-var ram = get_filter('ram');
-var storage = get_filter('storage');
+    filter_data(1);
 
-$.ajax({
-
-    url:"<?php echo base_url(); ?>product_filter/fetch_data"+page,
-    method:"POST",
-    dataType:"JSON",
-    data:{action:action,minimum_price:minimum_price,maximum_price:maximum_price,
-    brand:brand,ram:ram, storage:storage},
-
-    success:function(data){
-
-        $('.filter_data').html(data.product_list);
-        $('#pagination_link').html(data.pagination_link);
+    function filter_data(page)
+    {
+        $('.filter_data').html('<div id="loading" style="" ></div>');
+        var action = 'fetch_data';
+        var minimum_price = $('#hidden_minimum_price').val();
+        var maximum_price = $('#hidden_maximum_price').val();
+        var brand = get_filter('brand');
+        var ram = get_filter('ram');
+        var storage = get_filter('storage');
+        $.ajax({
+            url:"<?php echo base_url(); ?>product_filter/fetch_data/"+page,
+            method:"POST",
+            dataType:"JSON",
+            data:{action:action, minimum_price:minimum_price, maximum_price:maximum_price, brand:brand, ram:ram, storage:storage},
+            success:function(data)
+            {
+                $('.filter_data').html(data.product_list);
+                $('#pagination_link').html(data.pagination_link);
+            }
+        })
     }
 
-})
+    function get_filter(class_name)
+    {
+        var filter = [];
+        $('.'+class_name+':checked').each(function(){
+            filter.push($(this).val());
+        });
+        return filter;
+    }
 
-  } 
-  function get_filter(class_name)
-  {
-    var filter =[];
-    $('.'+class_name+ ':checked').each(function(){
-        filter.push($(this).val());
+    $(document).on('click', '.pagination li a', function(event){
+        event.preventDefault();
+        var page = $(this).data('ci-pagination-page');
+        filter_data(page);
     });
-    return filter;
 
-  }
-})
-    </script>
+    $('.common_selector').click(function(){
+        filter_data(1);
+    });
+
+    $('#price_range').slider({
+        range:true,
+        min:1000,
+        max:65000,
+        values:[1000,65000],
+        step:500,
+        stop:function(event, ui)
+        {
+            $('#price_show').html(ui.values[0] + ' - ' + ui.values[1]);
+            $('#hidden_minimum_price').val(ui.values[0]);
+            $('#hidden_maximum_price').val(ui.values[1]);
+            filter_data(1);
+        }
+
+    });
+
+});
+</script>
+
 </body>
+
 </html>
