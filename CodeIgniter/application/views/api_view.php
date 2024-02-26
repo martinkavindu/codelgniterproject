@@ -29,8 +29,10 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
+                            <th>Name</th>
+                            <th>Skills</th>
+                            <th>Address</th>
+                            <th>Designation</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -74,30 +76,21 @@
     </div>
 </div>
 
-
-<script type = "text/javascript" language="javascript">
-    $(document).ready(function(){
-function fetch_data()
-{
-    $.ajax({
-        url:"<?php echo base_url();?>test_api/action",
-        method:"POST",
-        data:{data_action:'fetch_all'},
-        sucess:function(data)
-        {
-            $('tbody').html(data);
-
-        }
-
-    })
-
-}
-fetch_data();
-
-
-
-    });
-     
-    </script>
 </body>
 </html>
+<script type="text/javascript" language="javascript">
+    $(document).ready(function(){
+        function fetch_data() {
+            $.ajax({
+                url: "<?php echo base_url();?>test_api/action",
+                method: "POST",
+                data: { data_action: 'fetch_all' },
+                success: function(data) { // Corrected 'success' spelling
+                    $('tbody').html(data);
+                }
+            });
+        }
+
+        fetch_data();
+    });
+</script>
