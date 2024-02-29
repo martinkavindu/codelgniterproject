@@ -56,13 +56,23 @@
                     <h4 class="modal-title">Add User</h4>
                 </div>
                 <div class="modal-body">
-                    <label>Enter First Name</label>
-                    <input type="text" name="first_name" id="first_name" class="form-control" />
-                    <span id="first_name_error" class="text-danger"></span>
+                    <label>Name</label>
+                    <input type="text" name="name" id="name" class="form-control" />
+                    <span id="name_error" class="text-danger"></span>
                     <br />
-                    <label>Enter Last Name</label>
-                    <input type="text" name="last_name" id="last_name" class="form-control" />
-                    <span id="last_name_error" class="text-danger"></span>
+                    <label>Skills</label>
+                    <input type="text" name="skills" id="skills" class="form-control" />
+                    <span id="skills_error" class="text-danger"></span>
+                    <br />
+
+                    <label>Address</label>
+                    <input type="text" name="address" id="address" class="form-control" />
+                    <span id="address_error" class="text-danger"></span>
+                    <br />
+
+                    <label>Designation</label>
+                    <input type="text" name="designation" id="designation" class="form-control" />
+                    <span id="designation_error" class="text-danger"></span>
                     <br />
                 </div>
                 <div class="modal-footer">
@@ -85,59 +95,49 @@
                 url: "<?php echo base_url();?>test_api/action",
                 method: "POST",
                 data: { data_action: 'fetch_all' },
-                success: function(data) { // Corrected 'success' spelling
+                success: function(data) {
                     $('tbody').html(data);
                 }
             });
         }
 
         fetch_data();
-        $('#add_button').click(function(){
 
+        $('#add_button').click(function(){
             $('#user_form')[0].reset();
             $('.modal-title').text('Add User');
             $('#action').val('Add');
             $('#data_action').val('Insert'); 
-            $('userModal').modal('show');
-
+            $('#userModal').modal('show');
         });
 
-        $(document).on('submit','#user_form',function(event){
-
-        event.preventDefault();
-
-        $.ajax({
-
-            url:"<?php echo base_url().'test_api/action' ?>",
-            method:"POST",
-            data:$(this).serialize(),
-            dataType:"json",
-            success:function(data)
-            {
-                if(data.success)
-                {
-                    $(#user_form)[0].reset();
-                    $('#userModal').modal('show');
-                    fetch_data();
-
-                  if($('#data_action').val()=="Insert")
-                  {
-                    $('#success_message').html('<div class = "alert alert-success"> Data Inserted</div>');
-                  }  
-
-                }
-
-                if(data.error)
-                {
-                    $('#name_error').html(data.name_error);
-                    $('#skills_error').html(data.skills_error);
-
+        $(document).on('submit', '#user_form', function(event){
+            event.preventDefault();
+            $.ajax({
+                url: "<?php echo base_url().'test_api/action' ?>",
+                method: "POST",
+                data: $(this).serialize(),
+                dataType: "json",
+                success: function(data) {
+                    if(data.success) {
+                        $('#user_form')[0].reset();
+                        $('#userModal').modal('hide');
+                        fetch_data();
+                        if($('#data_action').val() == "Insert") {
+                            $('#success_message').html('<div class="alert alert-success">Data Inserted</div>');
+                            location.reload();
+                        }  
+                    }
+                    if (data.error) {
+    $('#name_error').html(data.name);
+    $('#skills_error').html(data.skills);
+    $('#address_error').html(data.address);
+    $('#designation_error').html(data.designation);
+}
 
                 }
-            }
-
-        })
-
-        })
+            });
+        });
     });
 </script>
+

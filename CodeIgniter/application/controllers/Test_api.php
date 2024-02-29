@@ -10,7 +10,9 @@ class Test_api extends CI_Controller{
     }
 
     public function action()
+
     {
+        $api_url = '';
         if ($this->input->post('data_action')) {
             $data_action = $this->input->post('data_action');
 
@@ -22,6 +24,8 @@ class Test_api extends CI_Controller{
 
         'name' =>$this->input->post('name'),
         'skills' =>$this->input->post('skills'),
+        'address' =>$this->input->post('address'),
+        'designation' =>$this->input->post('designation'),
 
        );
        $client = curl_init($api_url);
