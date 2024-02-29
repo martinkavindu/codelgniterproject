@@ -92,5 +92,52 @@
         }
 
         fetch_data();
+        $('#add_button').click(function(){
+
+            $('#user_form')[0].reset();
+            $('.modal-title').text('Add User');
+            $('#action').val('Add');
+            $('#data_action').val('Insert'); 
+            $('userModal').modal('show');
+
+        });
+
+        $(document).on('submit','#user_form',function(event){
+
+        event.preventDefault();
+
+        $.ajax({
+
+            url:"<?php echo base_url().'test_api/action' ?>",
+            method:"POST",
+            data:$(this).serialize(),
+            dataType:"json",
+            success:function(data)
+            {
+                if(data.success)
+                {
+                    $(#user_form)[0].reset();
+                    $('#userModal').modal('show');
+                    fetch_data();
+
+                  if($('#data_action').val()=="Insert")
+                  {
+                    $('#success_message').html('<div class = "alert alert-success"> Data Inserted</div>');
+                  }  
+
+                }
+
+                if(data.error)
+                {
+                    $('#name_error').html(data.name_error);
+                    $('#skills_error').html(data.skills_error);
+
+
+                }
+            }
+
+        })
+
+        })
     });
 </script>

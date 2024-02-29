@@ -13,6 +13,26 @@ class Test_api extends CI_Controller{
     {
         if ($this->input->post('data_action')) {
             $data_action = $this->input->post('data_action');
+
+            if($data_action == "Insert"){
+
+                $api_url= "http://localhost/introduction_codelgniter/codelgniterproject/CodeIgniter/api/insert";
+            }
+       $form_data =array(
+
+        'name' =>$this->input->post('name'),
+        'skills' =>$this->input->post('skills'),
+
+       );
+       $client = curl_init($api_url);
+       curl_setopt($client,CURLOPT_POST,true);
+       curl_setopt($client,CURLOPT_POSTFIELDS,$form_data);
+       curl_setopt($client,CURLOPT_RETURNTRANSFER,true);
+
+       $response = curl_exec($client);
+       curl_close($client);
+       echo $response;
+
     
             if ($data_action == "fetch_all") {
                 $api_url = "http://localhost/introduction_codelgniter/codelgniterproject/CodeIgniter/api";
