@@ -108,6 +108,25 @@ $array = array(
     }
     echo json_encode($array);
    }
+   public function delete() {
+    $response = array(); // Initialize response array
+
+    if ($this->input->post('id')) {
+        $user_id = $this->input->post('id');
+
+        if ($this->Api_model->delete_single_user($user_id)) {
+            $response['success'] = true;
+        } else {
+            $response['error'] = true;
+        }
+    } else {
+        $response['error'] = true; // If user ID is not provided, set error flag
+    }
+
+    // Send JSON response
+    echo json_encode($response);
+}
+
 
 }
 

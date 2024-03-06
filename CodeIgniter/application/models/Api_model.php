@@ -24,6 +24,11 @@
       $this->db->where('id',$user_id);
       $this->db->update('emp',$data);
     }
+    public function  delete_single_user($user_id){
+      $this->db->where('id',$user_id);
+      $this->db->delete('emp');
+
+    }
  }
 
 ?>

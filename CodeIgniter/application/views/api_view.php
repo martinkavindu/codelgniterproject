@@ -160,9 +160,28 @@
         
 
       }
-          })
+          });
 
-        })
+        });
+        $(document).on('click', '.delete', function(){
+    var user_id = $(this).attr('id');
+
+    if(confirm("Are you sure you want to delete this?")) {
+        $.ajax({
+            url: "<?php echo base_url() ;?>test_api/action",
+            method: "POST",
+            data: {user_id: user_id, data_action: 'Delete'},
+            dataType: "JSON",
+            success: function(data) {
+                if(data.success) {
+                    $('#success_message').html('<div class="alert alert-success">Data deleted </div>');
+                    fetch_data(); 
+                }
+            }
+        });
+    }
+});
+
     });
 </script>
 
