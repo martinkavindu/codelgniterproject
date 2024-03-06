@@ -138,6 +138,31 @@
                 }
             });
         });
+
+        $(document).on('click','.edit',function(){
+          var user_id = $(this).attr('id');
+          $.ajax({
+            url:"<?php echo base_url();?>test_api/action",
+            method:"POST",
+            data:{user_id:user_id,data_action:'fetch_single'},
+      dataType:'json',
+      success:function(data)
+      {
+        $('#userModal').modal('show');
+        $('#name').val(data.name);
+        $('#skills').val(data.skills);
+        $('#address').val(data.address);
+        $('#designation').val(data.designation);
+        $('.middle-title').text('Edit User');
+        $('#user_id').val(user_id);
+        $('#action').val('Edit');
+        $('#data_action').val('Edit');
+        
+
+      }
+          })
+
+        })
     });
 </script>
 

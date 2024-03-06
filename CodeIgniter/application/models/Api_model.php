@@ -13,6 +13,17 @@
        $this->db->insert('emp',$data); 
        
     }
+    public function fetch_single_user($user_id){
+      $this->db->where('id',$user_id);
+       $query = $this->db->get('emp');
+
+       return $query->result_array();
+    }
+    public function update_api($user_id,$data)
+    {
+      $this->db->where('id',$user_id);
+      $this->db->update('emp',$data);
+    }
  }
 
 ?>

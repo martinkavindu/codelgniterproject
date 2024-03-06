@@ -15,6 +15,47 @@ class Test_api extends CI_Controller{
         $api_url = '';
         if ($this->input->post('data_action')) {
             $data_action = $this->input->post('data_action');
+            if($data_action == "Edit")
+            {
+                $api_url = "http://localhost/introduction_codelgniter/codelgniterproject/CodeIgniter/api/update"; 
+                $form_data = array(
+                    'name' => $this->input->post('name'),
+                    'skills' => $this->input->post('skills'),
+                    'address' => $this->input->post('address'),
+                    'designation' => $this->input->post('designation'),
+                    'id' => $this->input->post('user_id'),
+                );
+   $client = curl_init($api_url);
+   curl_setopt($client,CURLOPT_POST,true);
+   curl_setopt($client,CURLOPT_POSTFIELDS,$form_data);
+   curl_setopt($client,CURLOPT_RETURNTRANSFER,true);
+   $response = curl_exec($client);
+   curl_close($client);
+
+   echo $response;
+   
+
+            }
+
+          if($data_action == "fetch_single")
+          {
+
+            $api_url = "http://localhost/introduction_codelgniter/codelgniterproject/CodeIgniter/api/fetch_single";
+         $form_data = array(
+            'id'     =>$this->input->post('user_id')
+         );
+         $client = curl_init($api_url);
+         curl_setopt($client,CURLOPT_POST,true);
+
+         curl_setopt($client,CURLOPT_POSTFIELDS,$form_data);
+
+           curl_setopt($client,CURLOPT_RETURNTRANSFER,true);
+            $response = curl_exec($client);
+            curl_close($client);
+
+            echo $response;
+    
+          }
 
             if($data_action == "Insert"){
 
