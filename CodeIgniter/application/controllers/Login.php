@@ -11,7 +11,7 @@ class Login extends CI_Controller {
    redirect('private_area');
   }
   $this->load->library('form_validation');
-  $this->load->library('encrypt');
+//   $this->load->library('encrypt');
   $this->load->model('login_model');
  }
 
@@ -29,12 +29,14 @@ class Login extends CI_Controller {
    $result = $this->login_model->can_login($this->input->post('user_email'), $this->input->post('user_password'));
    if($result == '')
    {
+    $this->session->set_flashdata('success','login success');
     redirect('private_area');
    }
    else
    {
     $this->session->set_flashdata('message',$result);
     redirect('login');
+    
    }
   }
   else

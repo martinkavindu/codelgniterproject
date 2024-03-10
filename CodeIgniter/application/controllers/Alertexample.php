@@ -13,7 +13,7 @@ class Alertexample extends CI_Controller
     public function validation(){
         $this->form_validation->set_rules('name','name','required');
 
-        if($this->form_validation->run() == TRUE){
+        if($this->form_validation->run()){
             $this->session->set_flashdata('success','good work');
         }else
         {
